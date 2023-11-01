@@ -1,3 +1,6 @@
+//Adding ScalaTest:
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.17" % "test"
+
 
 
 // The simplest possible sbt build file is just one line:
