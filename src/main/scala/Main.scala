@@ -6,31 +6,173 @@ object Main
     {
       case Num(i: Int)
       case Minus(exp : ArithmeticExpression)
+      case Plus(exp1 : ArithmeticExpression , exp2 : ArithmeticExpression)
       case Mult(exp1: ArithmeticExpression , exp2: ArithmeticExpression)
       case Div(exp1: ArithmeticExpression , exp2: ArithmeticExpression)
       case Pow(exp1: ArithmeticExpression , exp2: ArithmeticExpression)
     }
 
     val mynum  = ArithmeticExpression.Num(5)
+    val num2 = ArithmeticExpression.Num(21)
     val myminus = ArithmeticExpression.Minus(mynum)
+    val myplus = ArithmeticExpression.Plus(mynum , myminus)
+    val mymult = ArithmeticExpression.Mult(mynum, myminus)
+    val mydiv = ArithmeticExpression.Div(mynum,myminus)
+    val expr = ArithmeticExpression.Div(mynum,ArithmeticExpression.Mult(ArithmeticExpression.Minus(num2), mynum))
+    val expr2 = ArithmeticExpression.Mult(num2,mynum)
 
     object ArithmeticExpression{
 
       // todo : implement
-      def evaluate(expression : ArithmeticExpression) : Double = {2.2}
+      def evaluate(expression : ArithmeticExpression) : Double = 
+      {
+      
+      //if Num
+        if (expression.productPrefix == ArithmeticExpression.Num.toString())
+        {
+          return extractDouble(expression.productElement(0)).get
+        }
+
+      //if Minus
+        if (expression.productPrefix == ArithmeticExpression.Minus.toString())
+        {
+          expression.productElement(0)
+          return (-1) * ArithmeticExpression.evaluate(expression.productElement(0).asInstanceOf[ArithmeticExpression])
+        }
+
+      //if Plus
+        if (expression.productPrefix == ArithmeticExpression.Plus.toString())
+        {
+          
+          
+          return 
+            //left
+            ArithmeticExpression.evaluate(expression.productElement(0).asInstanceOf[ArithmeticExpression]) 
+            +
+            ArithmeticExpression.evaluate(expression.productElement(1).asInstanceOf[ArithmeticExpression])
+            //right
+          
+          }
+
+        if (expression.productPrefix == ArithmeticExpression.Mult.toString())
+        {
+           return 
+            //left
+            ArithmeticExpression.evaluate(expression.productElement(0).asInstanceOf[ArithmeticExpression]) 
+            *
+            ArithmeticExpression.evaluate(expression.productElement(1).asInstanceOf[ArithmeticExpression])
+            //right         
+        }
+
+
+        if (expression.productPrefix == ArithmeticExpression.Div.toString())
+        {
+           return 
+            //left
+            ArithmeticExpression.evaluate(expression.productElement(0).asInstanceOf[ArithmeticExpression]) 
+            /
+            ArithmeticExpression.evaluate(expression.productElement(1).asInstanceOf[ArithmeticExpression])
+            //right         
+        }
+
+        
+        return 1
+      }
 
       // todo : Implement
-      def pretty(expression : ArithmeticExpression) : String = {"result"}
+      def pretty(expression : ArithmeticExpression) : String = 
+      {
+        
+       
+      //if Num
+        if (expression.productPrefix == ArithmeticExpression.Num.toString())
+        {
+          return  "" + extractDouble(expression.productElement(0)).get.toString() + ""
+        }
+
+      //if Minus
+        if (expression.productPrefix == ArithmeticExpression.Minus.toString())
+        {
+          expression.productElement(0)
+          return "(-"+ ArithmeticExpression.pretty(expression.productElement(0).asInstanceOf[ArithmeticExpression]).toString() + ")"
+        }
+
+      //if Plus
+        if (expression.productPrefix == ArithmeticExpression.Plus.toString())
+        {
+          
+          
+          return 
+            //left
+            "(" + ArithmeticExpression.pretty(expression.productElement(0).asInstanceOf[ArithmeticExpression]).toString() + ")"
+            + "+" +
+            "("+ ArithmeticExpression.pretty(expression.productElement(1).asInstanceOf[ArithmeticExpression]).toString() + ")"
+            //right
+          
+          }
+
+        if (expression.productPrefix == ArithmeticExpression.Mult.toString())
+        {
+          return 
+            //left
+            "(" + ArithmeticExpression.pretty(expression.productElement(0).asInstanceOf[ArithmeticExpression]).toString() + ")"
+            + "*" +
+            "("+ ArithmeticExpression.pretty(expression.productElement(1).asInstanceOf[ArithmeticExpression]).toString() + ")"
+            // right
+          
+ 
+        }
+
+
+        if (expression.productPrefix == ArithmeticExpression.Div.toString())
+        {
+          return ""+
+          //left
+          "(" + ArithmeticExpression.pretty(expression.productElement(0).asInstanceOf[ArithmeticExpression]).toString() + ")"
+          + "/" +
+          "("+ ArithmeticExpression.pretty(expression.productElement(1).asInstanceOf[ArithmeticExpression]).toString() + ")"
+          //right
+        }
+
+        
+       
+        
+          return "result"
+      }
 
 
     }
 
-    def f[T](v: T) = v
+// ! del prob    def f[T](v: T) = v
     
+// from https://stackoverflow.com/questions/42433234/how-to-convert-any-number-to-double
+    def extractDouble(expectedNumber: Any): Option[Double] = expectedNumber match 
+    {
+      case i: Int => Some(i.toDouble)
+      case l: Long => Some(l.toDouble)
+      case d: Double => Some(d)
+      case _ => None
+    }
+
     def main(args: Array[String]): Unit =
     {
-      println(s"num: ${mynum}")
-      println(s"myminus: ${myminus}")
-      println("Done")
+      // println(ArithmeticExpression.evaluate(mynum))
+      // println(ArithmeticExpression.evaluate(myminus))
+      // println(ArithmeticExpression.evaluate(myplus))
+      // println(ArithmeticExpression.evaluate(mymult))
+      // println(ArithmeticExpression.evaluate(mydiv))
+
+      // println(ArithmeticExpression.pretty(mynum))
+      // println(ArithmeticExpression.pretty(myminus))
+      // println(ArithmeticExpression.pretty(myplus))
+      // println(ArithmeticExpression.pretty(mymult))
+      // println(ArithmeticExpression.pretty(mydiv))
+
+      println(ArithmeticExpression.evaluate(expr))
+      println(ArithmeticExpression.pretty(expr))
+
+
+
+
     }
 }
