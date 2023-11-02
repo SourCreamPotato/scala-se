@@ -1,2 +1,5 @@
-scalac Main.scala
-scala Main
+scalac Main.scala -explain
+scala Main 
+
+rm *.class
+rm *.tasty
