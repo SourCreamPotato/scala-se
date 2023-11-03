@@ -131,6 +131,21 @@ object Main
           return "result"
       }
 
+      // doesnt work yet
+      def evaluate(expressions : List[ArithmeticExpression]): List[Double] =
+      {
+        val l:List[Double]
+        var counter = 0
+
+        expressions.foreach {
+          var l2 = List[Double]
+          ArithmeticExpression.evaluate(l(counter)) :: l2
+          
+          l = l2 :+
+
+          counter = counter + 1
+        }
+      }
 
     }
 
@@ -144,8 +159,9 @@ object Main
       case _ => None
     }
 
+
+
     def main(args: Array[String]): Unit =
     {
-
     }
 }
