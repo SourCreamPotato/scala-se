@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/home/dio/Documents/it/languages/scala/uni/SE/ha01/arithmetic/ArithmeticExpression.scala:9:7: '=>' expected but 'case' found.[0m
+[0m[[0m[31merror[0m] [0m[0m      case Minus(exp : ArithmeticExpression)[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/dio/Documents/it/languages/scala/uni/SE/ha01/arithmetic/src/main/scala/Main.scala:9:7: '=>' expected but 'case' found.[0m
+[0m[[0m[31merror[0m] [0m[0m      case Minus(exp : ArithmeticExpression)[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

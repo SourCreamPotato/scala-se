@@ -1,7 +1,7 @@
-package arithmetic
-import javax.print.MultiDoc
-object Main 
-{
+    package scala
+
+    class ArithmeticExpression{
+        
     
     enum ArithmeticExpression() 
     {
@@ -142,10 +142,5 @@ object Main
       case l: Long => Some(l.toDouble)
       case d: Double => Some(d)
       case _ => None
-    }
-
-    def main(args: Array[String]): Unit =
-    {
-
     }
 }
